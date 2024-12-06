@@ -7,7 +7,7 @@ __all__ = ['print', 'sp', 'model', 'cli', 'ss', 'action_sp', 'chat', 'ssa', 'get
 # %% ../nbs/00_core.ipynb 3
 from .ollama_client import OllamaClient, OllamaChat
 from fastcore.script import *
-from fastcore.utils import *
+from fastcore.utils import *, contents
 import requests
 from functools import partial
 from rich.console import Console
