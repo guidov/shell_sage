@@ -5,9 +5,10 @@ __all__ = ['print', 'sp', 'model', 'cli', 'ss', 'action_sp', 'chat', 'ssa', 'get
            'run_cmd', 'main']
 
 # %% ../nbs/00_core.ipynb 3
-from claudette import *
+from .ollama_client import OllamaClient, OllamaChat
 from fastcore.script import *
 from fastcore.utils import *
+import requests
 from functools import partial
 from rich.console import Console
 from rich.markdown import Markdown
@@ -57,8 +58,8 @@ sp = '''<assistant>You are ShellSage, a command-line teaching assistant created 
 </important>'''
 
 # %% ../nbs/00_core.ipynb 7
-model = models[1]
-cli = Client(model)
+model = "mistral"  # or your preferred Ollama model
+cli = OllamaClient(model)
 ss = partial(cli, sp=sp)
 
 # %% ../nbs/00_core.ipynb 8
@@ -105,7 +106,7 @@ action_sp = '''<assistant>You are ShellSage in Action Mode - an automated comman
 </important>'''
 
 # %% ../nbs/00_core.ipynb 9
-chat = Chat(model, sp=action_sp)
+chat = OllamaChat(model, sp=action_sp)
 ssa = chat.toolloop
 
 # %% ../nbs/00_core.ipynb 11
