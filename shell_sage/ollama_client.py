@@ -10,16 +10,23 @@ class OllamaClient:
         # Combine system prompt and query if provided
         prompt = f"{sp}\n{query}" if sp else query
         
-        response = requests.post(
-            f"{self.base_url}/api/generate",
-            json={
-                "model": self.model,
-                "prompt": prompt,
-                "stream": False
-            }
-        )
-        response.raise_for_status()
-        return response.json()["response"]
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/generate",
+                json={
+                    "model": self.model,
+                    "prompt": prompt,
+                    "stream": False
+                }
+            )
+            response.raise_for_status()
+            return response.json()["response"]
+        except requests.exceptions.ConnectionError:
+            return "Error: Cannot connect to Ollama. Please ensure Ollama is running with: 'ollama serve'"
+        except requests.exceptions.HTTPError as e:
+            return f"Error: HTTP {e.response.status_code} - {e.response.text}"
+        except Exception as e:
+            return f"Error: {str(e)}"
 
 class OllamaChat:
     def __init__(self, model: str = "qwen2.5-coder-ctx131072:7b", sp: Optional[str] = None, base_url: str = "http://localhost:11434"):

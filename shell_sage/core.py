@@ -59,8 +59,17 @@ sp = '''<assistant>You are ShellSage, a command-line teaching assistant created 
 
 # %% ../nbs/00_core.ipynb 7
 model = "mistral"  # or your preferred Ollama model
-cli = OllamaClient(model)
-ss = partial(cli, sp=sp)
+try:
+    # Test connection to Ollama
+    requests.get("http://localhost:11434/api/tags").raise_for_status()
+    cli = OllamaClient(model)
+    ss = partial(cli, sp=sp)
+except requests.exceptions.ConnectionError:
+    print("Error: Cannot connect to Ollama. Please ensure Ollama is running with: 'ollama serve'")
+    sys.exit(1)
+except requests.exceptions.HTTPError as e:
+    print(f"Error connecting to Ollama: HTTP {e.response.status_code} - {e.response.text}")
+    sys.exit(1)
 
 # %% ../nbs/00_core.ipynb 8
 action_sp = '''<assistant>You are ShellSage in Action Mode - an automated command execution assistant. You create and execute plans for bash commands and system administration tasks.</assistant>
