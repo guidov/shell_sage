@@ -2,7 +2,7 @@ import requests
 from typing import Optional, Dict, Any
 
 class OllamaClient:
-    def __init__(self, model: str = "mistral", base_url: str = "http://localhost:11434"):
+    def __init__(self, model: str = "qwen2.5-coder-ctx131072:7b", base_url: str = "http://localhost:11434"):
         self.model = model
         self.base_url = base_url
         
@@ -22,7 +22,7 @@ class OllamaClient:
         return response.json()["response"]
 
 class OllamaChat:
-    def __init__(self, model: str = "mistral", sp: Optional[str] = None, base_url: str = "http://localhost:11434"):
+    def __init__(self, model: str = "qwen2.5-coder-ctx131072:7b", sp: Optional[str] = None, base_url: str = "http://localhost:11434"):
         self.model = model
         self.sp = sp
         self.base_url = base_url
