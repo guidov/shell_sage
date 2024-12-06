@@ -1,8 +1,11 @@
 import requests
+import os
 from typing import Optional, Dict, Any
 
 class OllamaClient:
-    def __init__(self, model: str = "qwen2.5-coder-ctx131072:7b", base_url: str = "http://localhost:11434"):
+    def __init__(self, model: str = None, base_url: str = "http://localhost:11434"):
+        if model is None:
+            model = os.environ.get("OLLAMA_MODEL", "qwen2.5-coder-ctx131072:7b")
         self.model = model
         self.base_url = base_url
         
@@ -29,7 +32,9 @@ class OllamaClient:
             return f"Error: {str(e)}"
 
 class OllamaChat:
-    def __init__(self, model: str = "qwen2.5-coder-ctx131072:7b", sp: Optional[str] = None, base_url: str = "http://localhost:11434"):
+    def __init__(self, model: str = None, sp: Optional[str] = None, base_url: str = "http://localhost:11434"):
+        if model is None:
+            model = os.environ.get("OLLAMA_MODEL", "qwen2.5-coder-ctx131072:7b")
         self.model = model
         self.sp = sp
         self.base_url = base_url

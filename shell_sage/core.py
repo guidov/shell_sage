@@ -5,6 +5,7 @@ __all__ = ['print', 'sp', 'model', 'cli', 'ss', 'action_sp', 'chat', 'ssa', 'get
            'run_cmd', 'main']
 
 # %% ../nbs/00_core.ipynb 3
+import os
 from .ollama_client import OllamaClient, OllamaChat
 from fastcore.script import *
 from fastcore.utils import *
@@ -58,7 +59,7 @@ sp = '''<assistant>You are ShellSage, a command-line teaching assistant created 
 </important>'''
 
 # %% ../nbs/00_core.ipynb 7
-model = "qwen2.5-coder-ctx131072:7b"  # Using available Qwen model optimized for coding
+model = os.environ.get("OLLAMA_MODEL", "qwen2.5-coder-ctx131072:7b")  # Can be overridden with OLLAMA_MODEL env var
 try:
     # Test connection to Ollama
     requests.get("http://localhost:11434/api/tags").raise_for_status()
