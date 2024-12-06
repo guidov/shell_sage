@@ -58,7 +58,7 @@ sp = '''<assistant>You are ShellSage, a command-line teaching assistant created 
 </important>'''
 
 # %% ../nbs/00_core.ipynb 7
-model = "qwen2.5-coder:7b"  # Using available Qwen model optimized for coding
+model = "qwen2.5-coder-ctx131072:7b"  # Using available Qwen model optimized for coding
 try:
     # Test connection to Ollama
     requests.get("http://localhost:11434/api/tags").raise_for_status()
