@@ -8,7 +8,6 @@ __all__ = ['print', 'sp', 'model', 'cli', 'ss', 'action_sp', 'chat', 'ssa', 'get
 from .ollama_client import OllamaClient, OllamaChat
 from fastcore.script import *
 from fastcore.utils import *
-from fastcore.utils import contents
 import requests
 from functools import partial
 from rich.console import Console
@@ -170,7 +169,7 @@ def main(
     
     query = f'{ctxt}\n<query>\n{query}\n</query>'
     if action:
-        print(md(contents(chat(query))))
+        print(md(chat(query)))
         chat.tools = [run_cmd]
-        print(md(contents(ssa('proceed'))))
-    else: print(md(contents(ss(query))))
+        print(md(ssa('proceed')))
+    else: print(md(ss(query)))
