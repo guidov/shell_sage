@@ -21,7 +21,7 @@ We recommend also setting up your terminal editor of choice to keep the editor c
 echo "set t_ti= t_te=" >> ~/.vimrc
 ```
 
-You will also need to get an Anthropic API key and set its environment variable:
+You will also need to set an environment variable for your local ollama model:
 
 ```sh
 export OLLAMA_MODEL="qwen2.5-coder:7b"
