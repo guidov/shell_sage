@@ -1,5 +1,7 @@
 # ShellSage
 
+This is a fork of shell_sage modified to use your local ollama models.
+ 
 ## Usage
 
 ### Installation
@@ -22,7 +24,7 @@ echo "set t_ti= t_te=" >> ~/.vimrc
 You will also need to get an Anthropic API key and set its environment variable:
 
 ```sh
-export ANTHROPIC_API_KEY=sk...
+export OLLAMA_MODEL="qwen2.5-coder:7b"
 ```
 
 ## How to use
